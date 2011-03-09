@@ -1,5 +1,6 @@
 import re
 import Tkinter, tkFileDialog
+import timeit
 
 letters = "abcdefghijklmnopqrstuvwxyz"
 
@@ -60,15 +61,17 @@ def clean_text(data,corrections=0):
 regex_get_blocks = re.compile("(<.*?>)")
 regex_get_words = re.compile("([^a-zA-Z]*)")
 ##regex_get_words = re.compile("((?:[^a-zA-Z])*|(?:<.*?>))")#
-WORD_DICT = load_words('words.txt')
+WORD_DICT = set(load_words('words.txt'))
 
 root = Tkinter.Tk()
 root.withdraw()
-f = tkFileDialog.askopenfile(mode="rb",title="Open Text")
+##f = tkFileDialog.askopenfile(mode="rb",title="Open Text")
+f = open("test_data.txt")
 data = f.read()
 f.close()
-f = tkFileDialog.asksaveasfile(mode="w",title="Save Text")
-f.write(clean_book(data))
-f.close()
+print timeit.Timer('clean_book(data)',"from __main__ import clean_book,data").timeit(10)
+##f = tkFileDialog.asksaveasfile(mode="w",title="Save Text")
+##f.write(clean_book(data))
+##f.close()
 ##root.quit()
 raw_input("Press enter to quit")

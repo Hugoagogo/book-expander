@@ -25,9 +25,6 @@ def compound(word):
                 p2 = word[x:]
 ##                print p1,p2
                 if p1.lower() in WORD_DICT and p2.lower() in WORD_DICT:
-                    if p2[0].lower() == "s" and p2[1:].lower() in WORD_DICT:
-                        p1+=p2[0]
-                        p2 = p2[1:]
                     return p1+" "+p2
 
 def clean_book(data):
